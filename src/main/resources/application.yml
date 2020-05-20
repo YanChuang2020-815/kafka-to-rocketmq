@@ -1,0 +1,19 @@
+server:
+  port: 9797
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: kafka-service:9092
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      acks: 1
+      keySerializer: org.apache.kafka.common.serialization.StringSerializer
+      valueSerializer: org.apache.kafka.common.serialization.StringSerializer
+
+    consumer:
+      bootstrap-servers: kafka-service:9092
+      group-id: ananops-rdc
+      auto-offset-reset: earliest
+      keySerializer: org.apache.kafka.common.serialization.StringSerializer
+      valueSerializer: org.apache.kafka.common.serialization.StringSerializer
