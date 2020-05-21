@@ -1,5 +1,8 @@
 package com.yanchuang.kafkatorocketmq.kafka;
 
+import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.common.message.Message;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -8,10 +11,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ConsumerListener {
+    @Autowired
+    DefaultMQProducer defaultMQProducer;
 
     @KafkaListener(topics = "deviceData")
     public void onMessage(String message){
-        //insertIntoDb(buffer);//这里为插入数据库代码
+        Message sendMsg = new Message("deviceDate",message.getBytes());
+        try {
+            defaultMQProducer.send(sendMsg);
+        } catch (Exception e){
+            System.out.println("mq消息发送异常");
+            e.printStackTrace();
+        }
         System.out.println(message);
     }
 

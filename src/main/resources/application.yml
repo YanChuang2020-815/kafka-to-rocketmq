@@ -17,3 +17,12 @@ spring:
       auto-offset-reset: earliest
       keySerializer: org.apache.kafka.common.serialization.StringSerializer
       valueSerializer: org.apache.kafka.common.serialization.StringSerializer
+
+rocketmq:
+  producer:
+    isOnOff: on
+    groupName: ananops-rdc
+    namesrvAddr: rocketmq-addr:9876
+    maxMessageSize: 4096
+    sendMsgTimeOut: 3000
+    retryTimesWhenSendFailed: 2
