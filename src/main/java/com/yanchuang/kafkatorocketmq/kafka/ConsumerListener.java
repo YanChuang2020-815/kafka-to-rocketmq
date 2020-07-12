@@ -16,7 +16,7 @@ public class ConsumerListener {
 
     @KafkaListener(topics = "deviceData")
     public void onMessage(String message){
-        Message sendMsg = new Message("deviceDate",message.getBytes());
+        Message sendMsg = new Message("deviceData",message.getBytes());
         try {
             defaultMQProducer.send(sendMsg);
         } catch (Exception e){
